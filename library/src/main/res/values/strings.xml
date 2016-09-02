@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">library</string>
+    <string name="page_loading">加载中</string>
+</resources>
