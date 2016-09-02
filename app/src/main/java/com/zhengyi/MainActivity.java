@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.zhengyi.adapter.PulmImplAdapter;
 import com.zhengyi.library.PulmListView;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         mPulmListView = (PulmListView) findViewById(R.id.id_pulm_lv);
         mAdapter = new PulmImplAdapter(this, mItems);
         mPulmListView.setAdapter(mAdapter);
+        // 设置加载更多的回调
         mPulmListView.setOnPullUpLoadMoreListener(new PulmListView.OnPullUpLoadMoreListener() {
             @Override
             public void onPullUpLoadMore() {
@@ -58,8 +61,15 @@ public class MainActivity extends AppCompatActivity {
                         boolean isPageFinished = index >= MAX_NUM;
                         mPulmListView.onFinishLoading(isPageFinished, newItems, false);
                     }
-                }, 6000);
+                }, 2000);
             }
         });
+        // 设置自定义的加载更多的View(ps:自定义View的根布局id必须声明为id_load_more_layout)
+        mPulmListView.setLoadMoreView(createCustomLoadMoreView());
+    }
+
+    private View createCustomLoadMoreView() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        return inflater.inflate(R.layout.custom_load_more_view, mPulmListView, false);
     }
 }
