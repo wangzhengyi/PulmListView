@@ -8,14 +8,14 @@ import java.util.List;
 /**
  * 抽象的Adapter.
  */
-public abstract class PumlBaseAdapter<T> extends BaseAdapter {
+public abstract class PulmBaseAdapter<T> extends BaseAdapter {
     protected List<T> items;
 
-    public PumlBaseAdapter() {
+    public PulmBaseAdapter() {
         this.items = new ArrayList<>();
     }
 
-    public PumlBaseAdapter(List<T> items) {
+    public PulmBaseAdapter(List<T> items) {
         this.items = items;
     }
 

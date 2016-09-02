@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -46,8 +47,9 @@ public class PulmListView extends ListView {
 
     private void init() {
         mIsLoading = false;
-        mIsPageFinished = true;
+        mIsPageFinished = false;
         mLoadMoreView = new LoadMoreView(getContext());
+        addFooterView(mLoadMoreView);
         super.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -67,6 +69,7 @@ public class PulmListView extends ListView {
                 int lastVisibleItem = firstVisibleItem + visibleItemCount;
                 if (!mIsLoading && !mIsPageFinished && lastVisibleItem == totalItemCount) {
                     if (mOnPullUpLoadMoreListener != null) {
+                        mIsLoading = true;
                         mOnPullUpLoadMoreListener.onPullUpLoadMore();
                     }
                 }
@@ -90,7 +93,7 @@ public class PulmListView extends ListView {
         mIsLoading = false;
         setIsPageFinished(isPageFinished);
         if (newItems != null && newItems.size() > 0) {
-            PumlBaseAdapter adapter = (PumlBaseAdapter) getAdapter();
+            PulmBaseAdapter adapter = (PulmBaseAdapter) ((HeaderViewListAdapter) getAdapter()).getWrappedAdapter();
             adapter.addMoreItems(newItems, isFirstLoad);
         }
     }

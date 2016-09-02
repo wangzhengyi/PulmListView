@@ -1,29 +1,65 @@
 package com.zhengyi;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.zhengyi.adapter.PulmImplAdapter;
 import com.zhengyi.library.PulmListView;
 
-public class MainActivity extends AppCompatActivity {
-    private PulmListView mPulmListView;
+import java.util.ArrayList;
+import java.util.List;
 
+public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private PulmListView mPulmListView;
+    private PulmImplAdapter mAdapter;
+    private List<String> mItems = new ArrayList<>();
+    private int index;
+    private static final int MAX_NUM = 100;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initData();
         initView();
+    }
 
-        setViewStatus();
+    private void initData() {
+        mItems.addAll(generateItems());
+    }
+
+    private List<String> generateItems() {
+        List<String> newItems = new ArrayList<>();
+        for (int i = 0; i < 10 && index < MAX_NUM; i++, index++) {
+            newItems.add("标题是" + index);
+        }
+
+        return newItems;
     }
 
     private void initView() {
-
-    }
-
-    private void setViewStatus() {
-
+        mPulmListView = (PulmListView) findViewById(R.id.id_pulm_lv);
+        mAdapter = new PulmImplAdapter(this, mItems);
+        mPulmListView.setAdapter(mAdapter);
+        mPulmListView.setOnPullUpLoadMoreListener(new PulmListView.OnPullUpLoadMoreListener() {
+            @Override
+            public void onPullUpLoadMore() {
+                // 实现加载更多
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<String> newItems = generateItems();
+                        Log.e(TAG, "new items num=" + newItems + ", already has items=" + mAdapter.getCount());
+                        boolean isPageFinished = index >= MAX_NUM;
+                        mPulmListView.onFinishLoading(isPageFinished, newItems, false);
+                    }
+                }, 6000);
+            }
+        });
     }
 }
