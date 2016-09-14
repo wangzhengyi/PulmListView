@@ -49,7 +49,6 @@ public class PulmListView extends ListView {
         mIsLoading = false;
         mIsPageFinished = false;
         mLoadMoreView = new LoadMoreView(getContext());
-        addFooterView(mLoadMoreView);
         super.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -70,11 +69,18 @@ public class PulmListView extends ListView {
                 if (!mIsLoading && !mIsPageFinished && lastVisibleItem == totalItemCount) {
                     if (mOnPullUpLoadMoreListener != null) {
                         mIsLoading = true;
+                        showLoadMoreView();
                         mOnPullUpLoadMoreListener.onPullUpLoadMore();
                     }
                 }
             }
         });
+    }
+
+    private void showLoadMoreView() {
+        if (findViewById(R.id.id_load_more_layout) == null) {
+            addFooterView(mLoadMoreView);
+        }
     }
 
     @Override
@@ -100,13 +106,7 @@ public class PulmListView extends ListView {
 
     private void setIsPageFinished(boolean isPageFinished) {
         mIsPageFinished = isPageFinished;
-        if (mIsPageFinished) {
-            removeFooterView(mLoadMoreView);
-        } else {
-            if (findViewById(R.id.id_load_more_layout) == null) {
-                addFooterView(mLoadMoreView);
-            }
-        }
+        removeFooterView(mLoadMoreView);
     }
 
     /**
@@ -117,11 +117,14 @@ public class PulmListView extends ListView {
     public void setLoadMoreView(View view) {
         removeFooterView(mLoadMoreView);
         mLoadMoreView = view;
-        addFooterView(mLoadMoreView);
     }
 
     /**
      * 设置上拉加载更多的回调接口.
+<<<<<<< 04cb7c2c4e557f0b3cf0a2de1164f57839286bde
+=======
+     * @param l 上拉加载更多的回调接口
+>>>>>>> 提交上拉加载更多ListView实现
      */
     public void setOnPullUpLoadMoreListener(OnPullUpLoadMoreListener l) {
         this.mOnPullUpLoadMoreListener = l;

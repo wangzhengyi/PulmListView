@@ -2,6 +2,7 @@
 
 上拉加载更多的ListView.
 
+------
 # Usage
 
 使用上拉加载更多ListView非常简单，分为以下几步：
@@ -36,23 +37,7 @@ private void initView() {
 }
 ```
 
-# 参考
+------
+# 原理
 
-主要参考[PagingListView](https://github.com/nicolasjafelle/PagingListView)的实现,扩充功能:
-
-1. 增加isFirstLoad参数,适配下拉刷新框架.
-2. 增加自定义加载更多View的配置.
-
-PulmImplAdapter的实现如下:
-```java
-public class PulmImplAdapter extends PulmBaseAdapter<String> {
-    private LayoutInflater inflater;
-
-    public PulmImplAdapter(Context context, List<String> items) {
-        super(items);
-        inflater = LayoutInflater.from(context);
-    }
-    
-    // ......
-}
-```
+[Android上拉加载更多ListView——PulmListView](http://blog.csdn.net/wzy_1988/article/details/52527562)
