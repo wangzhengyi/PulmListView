@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 }, 2000);
             }
         });
-        // 设置自定义的加载更多的View(ps:自定义View的根布局id必须声明为id_load_more_layout)
-        mPulmListView.setLoadMoreView(createCustomLoadMoreView());
     }
 
     private View createCustomLoadMoreView() {
