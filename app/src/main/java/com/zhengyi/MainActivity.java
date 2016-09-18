@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private PulmImplAdapter mAdapter;
     private List<String> mItems = new ArrayList<>();
     private int index;
-    private static final int MAX_NUM = 100;
+    private static final int MAX_NUM = 30;
     private Handler handler = new Handler();
 
     @Override
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> generateItems() {
         List<String> newItems = new ArrayList<>();
-        for (int i = 0; i < 10 && index < MAX_NUM; i++, index++) {
+        for (int i = 0; i < 12 && index < MAX_NUM; i++, index++) {
             newItems.add("标题是" + index);
         }
 

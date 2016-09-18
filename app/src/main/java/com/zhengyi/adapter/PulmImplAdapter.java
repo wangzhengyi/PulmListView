@@ -49,7 +49,7 @@ public class PulmImplAdapter extends PulmBaseAdapter<String> {
         }
 
         viewHolder.textView.setText(items.get(position));
-        viewHolder.imageView.setImageResource(R.mipmap.ic_launcher);
+        viewHolder.imageView.setImageResource(R.drawable.huoying);
         return convertView;
     }
 

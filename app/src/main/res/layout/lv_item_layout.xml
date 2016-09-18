@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:textSize="20sp"
-        android:textColor="#15a317"/>
+        android:textColor="#15a317"
+        android:layout_marginLeft="30dp"/>
 
 </LinearLayout>

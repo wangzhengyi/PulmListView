@@ -3,6 +3,11 @@
 上拉加载更多的ListView.
 
 ------
+# 效果图
+
+![screen](https://github.com/wangzhengyi/PulmListView/raw/master/screenrecord/screen.gif)
+
+------
 # Usage
 
 使用上拉加载更多ListView非常简单，分为以下几步：
